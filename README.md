@@ -12,6 +12,11 @@ Supported Systems
 |      i686      |     Yes    |
 | arm (Exynos 5) |     Yes    |
 
+Warning
+-------
+
+Current ARM implementatin has a problem.  It requires symbolic link from ~/Downloads/tools to /usr/local, but it slows chrome when users try to download something.  Chrome searches everything under Downloads include links, and it takes forever.
+
 Overview
 --------
 
