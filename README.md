@@ -15,7 +15,7 @@ Supported Systems
 Warning
 -------
 
-Current ARM implementatin has a problem.  It requires symbolic link from ~/Downloads/tools to /usr/local, but it slows chrome when users try to download something.  Chrome searches everything under Downloads include links, and it takes forever.
+Current ARM implementatin has little problem.  It requires symbolic link from under ~/Downloads/tools to /usr/local somewhere.  It slows chrome little when users try to download something.  Chrome searches everything under Downloads included symbolic links.  I reduced the number of files refered by the links, so it should be ok now.
 
 Overview
 --------
