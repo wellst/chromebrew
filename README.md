@@ -12,11 +12,6 @@ Supported Systems
 |      i686      |     Yes    |
 | arm (Exynos 5) |     Yes    |
 
-Warning
--------
-
-Current ARM implementatin has little problem.  It requires symbolic link from under ~/Downloads/tools to /usr/local somewhere.  It slows chrome little when users try to download something.  Chrome searches everything under Downloads included symbolic links.  I reduced the number of files refered by the links, so it should be ok now.
-
 Overview
 --------
 
@@ -67,4 +62,4 @@ Copyright 2016 Kazushi (Jam) Marukawa, added ARM related packages
 
 This project including all of its source files is released under the terms of [GNU General Public License (version 3 or later)](http://www.gnu.org/licenses/gpl.txt)
 
-Thanks Davy for [putting pre-compiled gcc for ARM](http://davy.nyacom.net/cros-arm-dev.html)
+Thanks Davy for [putting pre-compiled gcc for ARM](http://davy.nyacom.net/cros-arm-dev.html).  It was the beginning of chromebrew for ARM.
