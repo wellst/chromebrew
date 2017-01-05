@@ -71,8 +71,8 @@ def update
 
   #update package lists
   Dir.chdir CREW_LIB_PATH do
-    system "git fetch origin master"
-    system "git reset --hard origin/master"
+    system "git fetch origin newgcc"
+    system "git reset --hard origin/newgcc"
   end
   puts "Package lists, crew, and library updated."
   

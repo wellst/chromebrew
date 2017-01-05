@@ -1,7 +1,7 @@
 #chromebrew directories
 OWNER="jam7"
 REPO="chromebrew"
-BRANCH="master"
+BRANCH="newgcc"
 URL="https://raw.githubusercontent.com/$OWNER/$REPO/$BRANCH"
 CREW_PREFIX=/usr/local
 CREW_LIB_PATH=$CREW_PREFIX/lib/crew/
@@ -119,6 +119,6 @@ git config core.sparsecheckout true
 echo packages >> .git/info/sparse-checkout
 echo lib >> .git/info/sparse-checkout
 echo crew >> .git/info/sparse-checkout
-git fetch origin master
-git reset --hard origin/master
+git fetch origin newgcc
+git reset --hard origin/newgcc
 echo "Chromebrew installed successfully and package lists updated."
