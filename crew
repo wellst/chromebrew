@@ -22,6 +22,11 @@ else
   CREW_NPROC = ENV["CREW_NPROC"]
 end
 
+# Set CREW_XZ_OPT environment variable to `-7e` if the variable is not defined
+if ENV["CREW_XZ_OPT"].to_s == ''
+  ENV["CREW_XZ_OPT"] = "-7e"
+end
+
 ARCH = `uname -m`.strip
 
 $LOAD_PATH.unshift "#{CREW_LIB_PATH}lib"
