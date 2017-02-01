@@ -296,14 +296,14 @@ def resolveDependenciesAndInstall
   end
 end
 
-def resolveDependencies
+def resolveDependencies (build = false)
   @dependencies = []
 
   # check source packages existance
   @source_package = 0
 
-  def pushDeps
-    if @pkg.binary_url && @pkg.binary_url.has_key?(@device[:architecture])
+  def pushDeps (build = false)
+    if !build && @pkg.binary_url && @pkg.binary_url.has_key?(@device[:architecture])
       # Use binary dependencies if it exists, use source dependencies otherwise
       if @pkg.rdependencies
         @check_deps = @pkg.rdependencies
@@ -311,7 +311,7 @@ def resolveDependencies
         @check_deps = @pkg.dependencies
       end
     else
-      # Use source dependencies
+      # Use source dependencies for build mode or source url
       @check_deps = @pkg.dependencies
       @source_package += 1
     end
@@ -325,7 +325,9 @@ def resolveDependencies
     end
   end
   
-  pushDeps
+  # we pass build for only top level to make sure check the source dependency of top.
+  # we will check appropriate dependency for the rests.
+  pushDeps build
 
   # Add buildessential and solve its dependencies if any of dependent
   # packages are made from source
@@ -410,7 +412,7 @@ def resolveDependenciesAndBuild (pwd)
   begin
     origin = @pkg.name
 
-    resolveDependencies
+    resolveDependencies true
 
     search origin, true
     build_package pwd
