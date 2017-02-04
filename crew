@@ -408,14 +408,49 @@ def install
   puts "#{@pkg.name.capitalize} installed!"
 end
 
-def resolveDependenciesAndBuild (pwd)
+def resolveDependenciesAndBuild
   begin
     origin = @pkg.name
 
     resolveDependencies true
 
     search origin, true
-    build_package pwd
+    build_package Dir.pwd
+  rescue InstallError => e
+    puts "#{@pkg.name} failed to build: #{e.to_s}"
+  ensure
+    #cleanup
+    unless ARGV[2] == 'keep'
+      Dir.chdir CREW_BREW_DIR do
+        system "rm -rf *"
+        system "mkdir dest" #this is a little ugly, feel free to find a better way
+      end
+    end
+  end
+end
+
+def resolveDependenciesAndBuildAndInstall
+  begin
+    origin = @pkg.name
+
+    resolveDependencies true
+
+    search origin, true
+    build_package Dir.pwd
+    if @device[:installed_packages].any? { |pkg| pkg[:name] == @pkg.name }
+      puts "Removing since forcing install..."
+      remove @pkg.name
+    end
+    puts "Installing..."
+    install_package CREW_DEST_DIR
+
+    #add to installed packages
+    @device[:installed_packages].push(name: @pkg.name, version: @pkg.version)
+    File.open(CREW_CONFIG_PATH + 'device.json', 'w') do |file|
+      output = JSON.parse @device.to_json
+      file.write JSON.pretty_generate(output)
+    end
+    puts "#{@pkg.name.capitalize} installed!"
   rescue InstallError => e
     puts "#{@pkg.name} failed to build: #{e.to_s}"
   ensure
@@ -446,7 +481,7 @@ def build_package (pwd)
 
   # build package from filelist, dlist and binary files in CREW_DEST_DIR
   puts "Archiving..."
-  archive_package pwd
+  return archive_package pwd
 end
 
 def archive_package (pwd)
@@ -458,6 +493,7 @@ def archive_package (pwd)
     system "sha1sum #{pkg_name} > #{pkg_name}.sha1"
   end
   puts "#{pkg_name} is built!"
+  return pkg_name
 end
 
 def remove (pkgName)
@@ -535,7 +571,10 @@ when "install"
   resolveDependenciesAndInstall
 when "build"
   search @pkgName
-  resolveDependenciesAndBuild Dir.pwd
+  resolveDependenciesAndBuild
+when "binstall"
+  search @pkgName
+  resolveDependenciesAndBuildAndInstall
 when "remove"
   abort 'Removing actions must be ran with sudo.' unless USER == 'root'
   remove @pkgName
