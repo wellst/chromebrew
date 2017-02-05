@@ -35,6 +35,10 @@ class Package
     
   end
 
+  def self.check
+
+  end
+
   def self.system(*args)
     # add "-j#{CREW_NPROC}" argument to "make" at only compile-time
     if $building_now == true

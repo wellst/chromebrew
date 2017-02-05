@@ -476,6 +476,14 @@ def build_package (pwd)
   # CREW_DEST_DIR contains usr/local/... hierarchy
   build_and_preconfigure target_dir
 
+  # check compiled programs
+  if Dir.exist? target_dir
+    Dir.chdir target_dir do
+      puts "Checking..."
+      @pkg.check
+    end
+  end
+
   # prepare filelist and dlist at CREW_DEST_DIR
   prepare_package CREW_DEST_DIR
 
