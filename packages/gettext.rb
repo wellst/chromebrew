@@ -1,15 +1,36 @@
 require 'package'
 
 class Gettext < Package
-  version '0.18.3.1'
+  version '0.19.8.1'
+  source_url 'ftp://ftp.gnu.org/gnu/gettext/gettext-0.19.8.1.tar.xz'
+  source_sha1 'e0fe90ede22f7f16bbde7bdea791a835f2773fc9'
   binary_url ({
-    armv7l: 'https://dl.dropboxusercontent.com/s/wmfctz7x8bj6cwe/gettext-0.18.3.1-chromeos-armv7l.tar.xz',
-    i686: 'https://dl.dropboxusercontent.com/s/xmsfr7q9r99dhcs/gettext-0.18.3.1-chromeos-i686.tar.gz?token_hash=AAGJo0pqudCOkGU3NHOcBuFG2zLwWpapNXLX-zUJLcS3aA&dl=1',
-    x86_64: 'https://dl.dropboxusercontent.com/s/nidj0ehxwserhz6/gettext-0.18.3.1-chromeos-x86_64.tar.gz?token_hash=AAFn-kdXlB23HDVDCKTn9n_U-i9LFNCIB6HU0jSUiJTctA&dl=1'
+    armv7l: 'https://github.com/jam7/chromebrew/releases/download/binaries/gettext-0.19.8.1-chromeos-armv7l.tar.xz',
+    i686:   'https://github.com/jam7/chromebrew/releases/download/binaries/gettext-0.19.8.1-chromeos-i686.tar.xz',
+    x86_64: 'https://github.com/jam7/chromebrew/releases/download/binaries/gettext-0.19.8.1-chromeos-x86_64.tar.xz',
   })
   binary_sha1 ({
-    armv7l: '5224004048dd80bb523cd0091ad577b21448790b',
-    i686: '1ecbff59d6134c7f8804bcf18fb2b1b7a9a6d4c0',
-    x86_64: '22174347defa4f034a360078c248a61710c5f854'
+    armv7l: 'e7d6c3e6ee43554dc9d163179ce4c75c2791549b',
+    i686:   '9fb04566607094cd55cf5026ddf99fd7f640a4cf',
+    x86_64: '8c1f9662385cc1d349a679460f25b7bdf01d7f8e',
   })
+
+  depends_on 'diffutils'
+  depends_on 'ncurses'
+  depends_on 'libxml2'
+  rdepends_on 'ncurses'
+  rdepends_on 'libxml2'
+
+  def self.build
+    system "./configure", "--enable-shared", "--disable-static", "--with-pic"
+    system "make"
+  end
+
+  def self.install
+    system "make", "DESTDIR=#{CREW_DEST_DIR}", "install"
+  end
+
+  def self.check
+    system "make check"
+  end
 end
