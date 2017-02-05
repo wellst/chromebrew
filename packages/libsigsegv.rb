@@ -6,12 +6,15 @@ class Libsigsegv < Package
   source_sha1 'b75a647a9ebda70e7a3b33583efdd550e0eac094'
 
   def self.build
-    system "./configure CFLAGS=\" -fPIC\""
+    system "./configure", "--enable-shared", "--disable-static", "--with-pic"
     system "make"
   end
 
   def self.install
-    system "make check"
     system "make", "DESTDIR=#{CREW_DEST_DIR}", "install"
+  end
+
+  def self.check
+    system "make check"
   end
 end
