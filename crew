@@ -124,6 +124,7 @@ def update
 end
 
 def upgrade
+  upgrade = true
   if @pkgName
     search @pkgName
 
@@ -136,8 +137,7 @@ def upgrade
     
     if currentVersion != @pkg.version
       puts "Updating #{@pkg.name}..."
-      remove @pkg.name
-      resolveDependenciesAndInstall
+      resolveDependenciesAndInstall upgrade
     else
       puts "#{@pkg.name} is already up to date."
     end
@@ -154,8 +154,7 @@ def upgrade
       puts "Updating packages..."
       toBeUpdated.each do |package|
         search package
-        remove @pkg.name
-        resolveDependenciesAndInstall
+        resolveDependenciesAndInstall upgrade
       end
       puts "Packages have been updated."
     else
@@ -275,14 +274,14 @@ def install_package (pkgdir)
   end
 end
 
-def resolveDependenciesAndInstall
+def resolveDependenciesAndInstall (upgrade = nil)
   begin
     origin = @pkg.name
 
     resolveDependencies
   
     search origin, true
-    install
+    install upgrade
   rescue InstallError => e 
     puts "#{@pkg.name} failed to install: #{e.to_s}"
   ensure
@@ -368,8 +367,8 @@ def resolveDependencies (build = false)
   end
 end
 
-def install
-  if @device[:installed_packages].any? { |pkg| pkg[:name] == @pkg.name }
+def install (upgrade = nil)
+  if !upgrade && @device[:installed_packages].any? { |pkg| pkg[:name] == @pkg.name }
     puts "Package #{@pkg.name} already installed, skipping..."
     return
   end
@@ -392,6 +391,12 @@ def install
     else
       # use extracted binary directory
       dest_dir = target_dir
+    end
+
+    # remove it just before the file copy
+    if upgrade
+      puts "Removing since upgrade..."
+      remove @pkg.name
     end
 
     # install filelist, dlist and binary files
