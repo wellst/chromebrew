@@ -10,7 +10,7 @@ Supported Systems
 |:--------------:|:----------:|
 |     x86_64     |     Yes    |
 |      i686      |     Yes    |
-| arm (Exynos 5) |     Yes    |
+|     armv7l     |     Yes    |
 
 Overview
 --------
@@ -39,7 +39,7 @@ Then download and run the installation script
 Usage
 -----
 
-    crew <command> <package> <keep[temporary files]>
+    crew <command> <package|regex> <keep[temporary files]>
 
 Where available commands are:
   
@@ -47,12 +47,53 @@ Where available commands are:
   * download [downloads a package to `CREW_BREW_DIR` (`/usr/local/tmp/crew` by default), but doesn't install it]
   * install [installs a package along with its dependencies. You'll be prompted for confirmation]
   * remove [removes a package. Must be ran as root]
+  * whatprovides [lists packages containing files matching to regex]
+  * update [updates crew environment]
+  * upgrade [builds a package or installed all packages along with its dependencies]
+  * build [builds a package along with its dependenceies]
+  * binstall [builds and isntalls a package along with its dependencies]
   
 Available packages are listed in the [packages directory](https://github.com/jam7/chromebrew/tree/master/packages).
 
 Chromebrew will wipe its `BREW_DIR` (`/usr/local/tmp/crew` by default) after installation unless you pass "keep" as the last parameter when running "crew install".
 
     crew install <package> keep
+
+Modifications
+-------------
+
+Chromebrew at this repository modified from its original, https://github.com/skycocker/chromebrew.
+
+What modifications are:
+
+  * Refactoring crew (#443)
+  * Change to not use `-j` for install to avoid errors caused by race-condition (#488)
+  * Adding `rdepends_on` method to maintain run-time dependencies (#487)
+  * Add build and binstall command to build binary packages easily
+  * Add check method to check the correctness of compile
+  * Change the timing of `remove` to solve `no ruby` problem (#236)
+  * Adding smart git installation to isntall.sh
+  * Remove several unnecessary `-c` option from wget in install.sh (#383)
+  * Fix a bug of crew that is not removing `/usr/local/tmp/crew/dest` correctly
+  * Change crew to abort just after errors
+  * Add shell scripts to maintain binary package files (#343)
+  * Update curl to 7.52.1 and provide binaries
+  * Provide diffutils 3.5 binaries
+  * Update expat to 2.2.0 and provide binaries
+  * Update gettext to 0.19.8.1 and provide binaries
+  * Update git to 2.11.0 and provide binaries
+  * Update go to 1.7.5
+  * Provide less 481 binaries
+  * Provide libsigsegv 2.10 binaries
+  * Update libssh2 to 1.8.0 and provide binaries
+  * Update libxml2 to 2.9.4 and provide binaries
+  * Change ncurses to provide only ncurses, and provide ncursesw individually (#490)
+  * Provide ncurses and ncursesw binaries
+  * Provide openssl binaries
+  * Provide pkgconfig binaries
+  * Update toolchains and provide binaries (#461)
+  * Update zlibpkg to 1.2.11 and provide binaries
+
 
 License
 -------
