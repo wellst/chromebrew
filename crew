@@ -238,7 +238,7 @@ def build_and_preconfigure (target_dir)
     $building_now = true
     @pkg.build
     $building_now = false
-    system "rm -rf", CREW_DEST_DIR + "/*" #wipe crew destdir
+    system "rm -rf #{CREW_DEST_DIR}/*" #wipe crew destdir
     puts "Preconfiguring package..."
     @pkg.install
   end
