@@ -284,6 +284,7 @@ def resolveDependenciesAndInstall (upgrade = nil)
     install upgrade
   rescue InstallError => e 
     puts "#{@pkg.name} failed to install: #{e.to_s}"
+    exit 1
   ensure
     #cleanup
     unless ARGV[2] == 'keep'
@@ -423,6 +424,7 @@ def resolveDependenciesAndBuild
     build_package Dir.pwd
   rescue InstallError => e
     puts "#{@pkg.name} failed to build: #{e.to_s}"
+    exit 1
   ensure
     #cleanup
     unless ARGV[2] == 'keep'
@@ -458,6 +460,7 @@ def resolveDependenciesAndBuildAndInstall
     puts "#{@pkg.name.capitalize} installed!"
   rescue InstallError => e
     puts "#{@pkg.name} failed to build: #{e.to_s}"
+    exit 1
   ensure
     #cleanup
     unless ARGV[2] == 'keep'
@@ -597,5 +600,6 @@ when nil
   puts "Available commands: search, download, install, remove, whatprovides"
 else
   puts "I have no idea how to do #{@command} :("
-  puts "Available commands: search, download, install, remove, whatprovides"
+  puts "Available commands: search, download, install, remove, whatprovides, update, upgrade, build, binstall"
+  exit 1
 end
