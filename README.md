@@ -62,7 +62,8 @@ Chromebrew will wipe its `BREW_DIR` (`/usr/local/tmp/crew` by default) after ins
 Modifications
 -------------
 
-Chromebrew at this repository modified from its original, https://github.com/skycocker/chromebrew.
+Chromebrew at this repository is modified from its original, https://github.com/skycocker/chromebrew.
+I'll merge these modifications to the original, but it's time consuming.
 
 What modifications are:
 
@@ -77,6 +78,7 @@ What modifications are:
   * Fix a bug of crew that is not removing `/usr/local/tmp/crew/dest` correctly
   * Change crew to abort just after errors
   * Add shell scripts to maintain binary package files (#343)
+  * Correct bz2 version number to 1.0.6, fix symbolic link problem and (preparing to provide binaries)
   * Update curl to 7.52.1 and provide binaries
   * Provide diffutils 3.5 binaries
   * Update expat to 2.2.0 and provide binaries
@@ -90,10 +92,12 @@ What modifications are:
   * Change ncurses to provide only ncurses, and provide ncursesw individually (#490)
   * Provide ncurses and ncursesw binaries
   * Provide openssl binaries
+  * Update perl to 5.24.1 ... (preparing to provide binaries)
   * Provide pkgconfig binaries
+  * (Preparing to provide binaries)
+  * Update ruby to 2.4.0 ... (preparing to provide binaries)
   * Update toolchains and provide binaries (#461)
   * Update zlibpkg to 1.2.11 and provide binaries
-
 
 License
 -------
