@@ -11,6 +11,7 @@ class Mapserver < Package
   depends_on 'proj4'
   depends_on 'geos'
   depends_on 'curl'
+  depends_on 'libgd'
   depends_on 'libxml2'
 
   def self.build
