@@ -7,7 +7,9 @@ class Slang < Package
 
   def self.build
     system "./configure", "--prefix=/usr/local", "--without-x"
-    system "make"
+
+    # need to use single core for slang Makefile
+    system "make", "-j1"
   end
 
   def self.install
