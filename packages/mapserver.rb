@@ -1,9 +1,9 @@
 require 'package'
 
 class Mapserver < Package
-  version '5.6.9-1'
-  source_url 'http://download.osgeo.org/mapserver/mapserver-5.6.9.tar.gz'
-  source_sha1 '3f05bf6c9a32b34408e36ddd32f61d68d65cf01c'
+  version '7.0.4'
+  source_url 'http://download.osgeo.org/mapserver/mapserver-7.0.4.tar.gz'
+  source_sha1 '8fb13c27da5902e6d9ad50f3eba550bd90750607'
 
   depends_on 'gdal'
   depends_on 'libpng'
