@@ -12,6 +12,14 @@ Supported Systems
 |      i686      |     Yes    |
 |     armv7l     |     Yes    |
 
+Here, I'm releasing personally modified chromebrew.  Modifications are listed at
+[below](#modifications). If you are looking for the original chromebrew, please
+refer [the original site](https://github.com/skycocker/chromebrew/).
+
+Basically, I want to merge all modifications here to the original one.
+So, this chromebrew often rebase to the original one to make merging
+easier.
+
 Overview
 --------
 
@@ -68,16 +76,19 @@ I'll merge these modifications to the original, but it's time consuming.
 What modifications are:
 
   * Refactoring crew (#443)
+  * Refactoring install.sh (#522)
   * Change to not use `-j` for install to avoid errors caused by race-condition (#488)
   * Adding `rdepends_on` method to maintain run-time dependencies (#487)
   * Add build and binstall command to build binary packages easily
   * Add check method to check the correctness of compile
   * Change the timing of `remove` to solve `no ruby` problem (#236)
-  * Adding smart git installation to isntall.sh
+  * Add simple git installation in isntall.sh
   * Remove several unnecessary `-c` option from wget in install.sh (#383)
   * Fix a bug of crew that is not removing `/usr/local/tmp/crew/dest` correctly
   * Change crew to abort just after errors
   * Add shell scripts to maintain binary package files (#343)
+  * Provide bc binaries
+  * Provide bison binaries
   * Correct bz2 version number to 1.0.6, fix symbolic link problem and (preparing to provide binaries)
   * Update curl to 7.52.1 and provide binaries
   * Provide diffutils 3.5 binaries
@@ -89,14 +100,21 @@ What modifications are:
   * Provide libsigsegv 2.10 binaries
   * Update libssh2 to 1.8.0 and provide binaries
   * Update libxml2 to 2.9.4 and provide binaries
+  * Update m4 to 1.4.18 and provide binaries
+  * Update make to 4.2 and provide binaries
   * Change ncurses to provide only ncurses, and provide ncursesw individually (#490)
   * Provide ncurses and ncursesw binaries
   * Provide openssl binaries
-  * Update perl to 5.24.1 ... (preparing to provide binaries)
+  * Provide patch binaries
+  * Update perl to 5.24.1 and provide binaries
   * Provide pkgconfig binaries
-  * (Preparing to provide binaries)
-  * Update ruby to 2.4.0 ... (preparing to provide binaries)
+  * Update python 2.7 binaries
+  * Update python to 3.6 and provide binaries
+  * Update readline to 7.0p3 and provide binaries
+  * Update ruby to 2.4.0 and provide binaries
   * Update toolchains and provide binaries (#461)
+  * Update glibc to 2.23 and provide binaries
+  * Provide xzutils binaries
   * Update zlibpkg to 1.2.11 and provide binaries
 
 License
