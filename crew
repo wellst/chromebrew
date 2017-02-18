@@ -235,9 +235,9 @@ end
 def build_and_preconfigure (target_dir)
   Dir.chdir target_dir do
     puts "Building from source, this may take a while..."
-    $building_now = true
+    @pkg.in_build = true
     @pkg.build
-    $building_now = false
+    @pkg.in_build = false
     system "rm -rf #{CREW_DEST_DIR}/*" #wipe crew destdir
     puts "Preconfiguring package..."
     @pkg.install

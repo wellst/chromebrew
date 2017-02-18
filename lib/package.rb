@@ -5,7 +5,7 @@ class Package
   
   class << self
     attr_reader :dependencies, :rdependencies, :is_fake
-    attr_accessor :name
+    attr_accessor :name, :in_build
   end
   def self.depends_on (dependency = nil)
     @dependencies = [] unless @dependencies
@@ -41,7 +41,7 @@ class Package
 
   def self.system(*args)
     # add "-j#{CREW_NPROC}" argument to "make" at only compile-time
-    if $building_now == true
+    if @in_build == true
       if args[0] == "make"
         # modify ["make", "args", ...] into ["make", "-j#{CREW_NPROC}", "args", ...]
         args.insert(1, "-j#{CREW_NPROC}")
