@@ -102,17 +102,15 @@ What modifications are:
   * Update libxml2 to 2.9.4 and provide binaries
   * Update m4 to 1.4.18 and provide binaries
   * Update make to 4.2 and provide binaries
-  * Change ncurses to provide only ncurses, and provide ncursesw individually (#490)
   * Provide ncurses and ncursesw binaries
   * Provide openssl binaries
   * Provide patch binaries
-  * Update perl to 5.24.1 and provide binaries
+  * Add perl compile and check methods
   * Provide pkgconfig binaries
   * Update python 2.7 binaries
   * Update python to 3.6 and provide binaries
   * Update readline to 7.0p3 and provide binaries
   * Update ruby to 2.4.0 and provide binaries
-  * Update toolchains and provide binaries (#461)
   * Update glibc to 2.23 and provide binaries
   * Provide xzutils binaries
   * Update zlibpkg to 1.2.11 and provide binaries
