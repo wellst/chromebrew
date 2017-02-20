@@ -264,13 +264,7 @@ def install_package (pkgdir)
     FileUtils.mv 'dlist', CREW_CONFIG_PATH + "meta/#{@pkg.name}.directorylist"
     FileUtils.mv 'filelist', CREW_CONFIG_PATH + "meta/#{@pkg.name}.filelist"
 
-    File.open(CREW_CONFIG_PATH + "meta/#{@pkg.name}.directorylist").each_line do |line|
-      system "sudo", "mkdir", "-p", line.chomp
-    end
-
-    File.open(CREW_CONFIG_PATH + "meta/#{@pkg.name}.filelist").each_line do |line|
-      system "sudo", "mv", pkgdir + line.chomp, line.chomp
-    end
+    system "sudo tar cf - ./usr/* | (cd /; sudo tar xp --keep-directory-symlink -f -)"
   end
 end
 
