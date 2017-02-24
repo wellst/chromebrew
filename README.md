@@ -75,19 +75,17 @@ I'll merge these modifications to the original, but it's time consuming.
 
 What modifications are:
 
-  * Refactoring crew (#443)
-  * Refactoring install.sh (#522)
-  * Change to not use `-j` for install to avoid errors caused by race-condition (#488)
-  * Adding `rdepends_on` method to maintain run-time dependencies (#487)
-  * Add build and binstall command to build binary packages easily
-  * Add check method to check the correctness of compile
-  * Change the timing of `remove` to solve `no ruby` problem (#236)
-  * Add simple git installation in isntall.sh
-  * Remove several unnecessary `-c` option from wget in install.sh (#383)
-  * Fix a bug of crew that is not removing `/usr/local/tmp/crew/dest` correctly
-  * Change crew to abort just after errors
+  * Refactoring crew
+    * Change to not use `-j` for install to avoid errors caused by race-condition (#488, #526)
+    * Adding `rdepends_on` method to maintain run-time dependencies (#487, #539)
+    * Add build and binstall command to build binary packages easily
+    * Add check method to check the correctness of compile
+    * Change the timing of `remove` to solve `no ruby` problem (#236)
+    * Fix a bug of crew that is not removing `/usr/local/tmp/crew/dest` correctly
+    * Change crew to abort just after errors
   * Add shell scripts to maintain binary package files (#343)
   * Provide bc binaries
+  * Add gold-linker to binutils (#541)
   * Provide bison binaries
   * Correct bz2 version number to 1.0.6, fix symbolic link problem and (preparing to provide binaries)
   * Update curl to 7.52.1 and provide binaries
@@ -95,7 +93,7 @@ What modifications are:
   * Update expat to 2.2.0 and provide binaries
   * Update gettext to 0.19.8.1 and provide binaries
   * Update git to 2.11.0 and provide binaries
-  * Update go to 1.7.5
+  * Add check method to go
   * Provide less 481 binaries
   * Provide libsigsegv 2.10 binaries
   * Update libssh2 to 1.8.0 and provide binaries
