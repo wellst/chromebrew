@@ -85,7 +85,6 @@ What modifications are:
     * Change crew to abort just after errors
   * Add shell scripts to maintain binary package files (#343)
   * Provide bc binaries
-  * Add gold-linker to binutils (#541)
   * Provide bison binaries
   * Correct bz2 version number to 1.0.6, fix symbolic link problem and (preparing to provide binaries)
   * Update curl to 7.52.1 and provide binaries
