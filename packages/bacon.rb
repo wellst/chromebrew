@@ -9,7 +9,8 @@ class Bacon < Package
     system "./configure --prefix=/usr/local --without-gui"
     system 'sed -i "45s,/usr/share,/usr/local/share," Makefile'
     system 'sed -i "46s,/usr/share,/usr/local/share," Makefile'
-    system "make"
+    # use only single core
+    system "make", "-j1"
   end
 
   def self.install

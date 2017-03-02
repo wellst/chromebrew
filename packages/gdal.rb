@@ -13,6 +13,7 @@ class Gdal < Package
 
   def self.build
     system "./configure CFLAGS=\" -fPIC\" --with-png=internal --with-libtiff=internal --with-geotiff=internal --with-jpeg=internal --with-gif=internal --with-curl=/usr/local/bin/curl-config --with-geos=/usr/local/bin/geos-config --with-static-proj4=/usr/local/share/proj --with-python"
+    system "sudo chown `id -u`:`id -g` /usr/local/lib/python2.7/site-packages/"
     system "make"
   end
 

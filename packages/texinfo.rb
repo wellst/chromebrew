@@ -2,15 +2,33 @@ require 'package'
 
 class Texinfo < Package
   version '6.3'
-  source_url 'http://ftp.gnu.org/gnu/texinfo/texinfo-6.3.tar.gz' # software source tarball url
-  source_sha1 '29b16c646c7bc9cd351b2f1d8dafdce70e5377f6'                  # source tarball sha1 sum
+  source_url 'ftp://ftp.gnu.org/gnu/texinfo/texinfo-6.3.tar.xz'
+  source_sha1 '64568f2791d1309aaccc22e63758458fd249ec8b'
 
-  def self.build                                                  # self.build contains commands needed to build the software from source
-    system "./configure"
-    system "make"                                                 # ordered chronologically
+  depends_on 'gettext'
+  depends_on 'perl'
+  depends_on 'ncurses'
+  rdepends_on 'perl'
+  rdepends_on 'ncurses'
+
+  def self.build
+    # installing necessary perl modules
+    system 'cpan', 'install', 'Locale::Messages', 'Text::Unidecode', 'Unicode::EastAsianWidth'
+
+    # configure and make
+    system './configure',
+        '--with-external-Text-Unidecode',
+        '--with-external-Unicode-EastAsianWidth'
+    # Disable libintl perl since the latest libintl-perl breaks tests
+    #     '--with-external-libintl-perl',
+    system "make"
   end
 
-  def self.install                                                # self.install contains commands needed to install the software on the target system
-    system "make", "DESTDIR=#{CREW_DEST_DIR}", "install"          # remember to include DESTDIR set to CREW_DEST_DIR - needed to keep track of changes made to system
+  def self.install
+    system "make", "DESTDIR=#{CREW_DEST_DIR}", "install"
+  end
+
+  def self.check
+    system "make check"
   end
 end

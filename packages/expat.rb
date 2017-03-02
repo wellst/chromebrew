@@ -1,15 +1,30 @@
 require 'package'
 
 class Expat < Package
-  version '2.1.0'
+  version '2.2.0'
+  source_url 'https://sourceforge.net/projects/expat/files/expat/2.2.0/expat-2.2.0.tar.bz2/download'
+  source_sha1 '8453bc52324be4c796fd38742ec48470eef358b3'
   binary_url ({
-    armv7l: 'https://dl.dropboxusercontent.com/s/0wq0gbbg1cf5uub/expat-2.1.0-chromeos-armv7l.tar.xz',
-    i686: 'https://dl.dropboxusercontent.com/s/jh5uw42elm40t9a/expat-2.1.0-chromeos-i686.tar.gz?token_hash=AAGYckE0KoTPsydZGG85KTkpr7Nt5U1OUs0egJ1K0iJ1mg&dl=1',
-    x86_64: 'https://dl.dropboxusercontent.com/s/k89o1x1a3fwoamu/expat-2.1.0-chromeos-x86_64.tar.gz?token_hash=AAGBLOil45Zg7G2RlFlfDUxKfeDyTP3uUWjfBvGQrOjAYA&dl=1'
+    armv7l: 'https://github.com/jam7/chromebrew/releases/download/binaries/expat-2.2.0-chromeos-armv7l.tar.xz',
+    i686:   'https://github.com/jam7/chromebrew/releases/download/binaries/expat-2.2.0-chromeos-i686.tar.xz',
+    x86_64: 'https://github.com/jam7/chromebrew/releases/download/binaries/expat-2.2.0-chromeos-x86_64.tar.xz',
   })
   binary_sha1 ({
-    armv7l: '42ddf5b8e5db3bd7898bbc43997c95f488799ba8',
-    i686: '9ab42ec03d06cc64d5d9944cb4cc7eaa61a0af84',
-    x86_64: '3ac96a0e02c1117718d15bcd4976ef4bcef1a9ac'
+    armv7l: 'c7f6a4dd1d86c0d70ca629e79970bb5e42b11700',
+    i686:   '1bc29363757b205a9ef4fa00b5822cf10e73075e',
+    x86_64: '7e5223002c6f08c82df14fcc79f7e825ba5a1a71',
   })
+
+  def self.build
+    system "./configure", "--enable-shared", "--disable-static", "--with-pic"
+    system "make"
+  end
+
+  def self.install
+    system "make", "DESTDIR=#{CREW_DEST_DIR}", "install"
+  end
+
+  def self.check
+    system "make check"
+  end
 end
